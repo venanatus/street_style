@@ -1,0 +1,214 @@
+<!doctype html>
+{% load brand %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} Street Style {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+</head>
+<body>
+<style>
+    body {
+        background: url(" {% static 'images/fon5.jpg' %} ");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+
+    nav {
+        box-shadow: 1px 5px 5px deeppink;
+    }
+</style>
+<nav class="navbar has-background-black is-fixed-top " role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'shop:home' %}">
+            <img src="{% static 'images/images.png' %}" width="100" height="50">
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item has-text-success-dark">
+                Главная
+            </a>
+
+
+            <div class="navbar-item has-dropdown is-hoverable has-text-primary-dark">
+                <a class="navbar-link has-text-success-dark">
+                    Бренды
+                </a>
+
+                {% brands %}
+
+
+            </div>
+        </div>
+
+        <div class="navbar-end">
+            <form action="{% url 'shop:home' %}" method="get" class="mb-4">
+                <div class="field has-addons mt-4 mr-2 ">
+                    <div class="control">
+                        <input class="input is-rounded pl-6" type="search" placeholder="Поиск по названию и цене"
+                               name="search">
+                    </div>
+                    <div class="control">
+                        <button class="button is-rounded is-warning" type="submit">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="navbar-item">
+                <div class="buttons">
+                    {% if user.is_authenticated %}
+                    <button class="button is-primary" aria-haspopup="true" aria-controls="dropdown-menu">
+                        Добро пожаловать <span class="has-text-weight-bold mx-1">{{ user }}</span>
+                    </button>
+                    {% else %}
+                    <a href="{% url 'users:sign_up' %}" class="button is-danger">
+                        <strong>Зарегистрироваться</strong>
+                    </a>
+                    <a href="{% url 'users:sign_in' %}" class="button is-light">
+                        Авторизоваться
+                    </a>
+
+                    {% endif %}
+                </div>
+
+            </div>
+            {% if user.is_authenticated %}
+            <span class="navbar-item">
+   <div class="dropdown is-hoverable">
+       <div class="dropdown-trigger has-background-danger-light">
+           <button class="button is-info " aria-haspopup="true" aria-controls="dropdown-menu">
+               Мой профиль
+           </button>
+       </div>
+       <div class="dropdown-menu" id="dropdown-menu" role="menu">
+           <div class="dropdown-content">
+               <a href="" class="dropdown-item has-text-primary ">
+                  Редактировать профиль
+               </a>
+               <a href="" class="dropdown-item has-text-warning-dark">
+                   Сброс пароля
+               </a>
+               <hr class="dropdown-divider">
+               <a href="{% url 'users:sign_out' %}" class="dropdown-item has-text-danger">
+                   выход
+               </a>
+           </div>
+       </div>
+   </div>
+</span>
+            {% endif %}
+
+        </div>
+    </div>
+</nav>
+{% block slide %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+<footer class="footer cvet1">
+    <div class="container is-small">
+        <div class="">
+
+            <br>
+
+
+            <div class="columns">
+                <div class="column is-3">
+
+                    <div class="footer__menu">
+                        <a href="" class="title is-5  has-text-white">Покупателям</span></a>
+
+                    </div>
+                    <br>
+                    <p class="subtitle has-text-weight-medium  is-7">
+                        <a href="" class="has-text-white">Способ оплаты</a><br><br>
+                        <a href="" class="has-text-white">Доставка</a><br><br>
+                        <a href="" class="has-text-white">Возврат товара</a><br><br>
+                        <a href="" class="has-text-white">Возврат денежных средств</a><br><br>
+                        <a href="" class="has-text-white">Правила продажи</a>
+                        <a href="" class="has-text-white">Публичная оферта</a>
+                    </p>
+                </div>
+                <br>
+                <div class="column is-3">
+                    <div class="footer__menu ">
+                        <a href="" class="title is-5  has-text-white">Партнерам</a>
+
+                    </div>
+                    <p class="subtitle has-text-weight-medium pt-5 is-7">
+                        <a href="" class="has-text-white">Покупайте в Street_Style</a><br><br>
+                        <a href="" class="has-text-white">Пункт выдачи</a><br><br>
+                    </p>
+                </div>
+                <br>
+                <div class="column is-3">
+                    <div class="footer__menu ">
+                        <a href="" class="title is-5  has-text-white">Компания</a>
+
+                    </div>
+                    <p class="subtitle has-text-weight-medium pt-5 is-7">
+                        <a href="" class="has-text-white">О нас</a><br><br>
+                        <a href="" class="has-text-white">Реквизиты</a><br><br>
+                        <a href="" class="has-text-white">Пресс цетр</a><br><br>
+                        <a href="" class="has-text-white">Контыкты</a>
+                    </p>
+                </div>
+                <div class="column is-3">
+                    <div class="footer__menu">
+                        <a href="" class="title is-5  has-text-white">Мы в соцсетяx</a>
+
+                    </div>
+                    <p class="subtitle has-text-weight-medium pt-5 is-7">
+                        <a href="https://www.instagram.com/_z_m_080903/" class="has-text-white">Istagram</a><br><br>
+                        <a href="" class="has-text-white">VK</a><br><br>
+                        <a href="https://t.me/Pandasecurity_0809" class="has-text-white">Telegram</a><br><br>
+                        <a href="" class="has-text-white">Facebook</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-centered ">
+        <div class="column is-half">
+            <div class="has-text-centered">
+
+                <p class="title has-text-white is-6  mt-4 mb-5">© Все права защищены
+                    Политика конфиденциальности
+                    Публичная оферта</p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+<script>
+    bulmaCarousel.attach('#carousel-demo', {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        infinite: true,
+    });
+</script>
+
+
+</body>
+</html>

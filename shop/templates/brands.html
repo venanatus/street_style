@@ -1,0 +1,7 @@
+<div class="navbar-dropdown">
+    {% for brand in brands %}
+    <a class="navbar-item" href="{% url 'shop:home' %}?brand={{ brand.pk }}">
+        {{ brand }}
+    </a>
+    {% endfor %}
+</div>

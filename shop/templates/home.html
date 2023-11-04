@@ -1,0 +1,93 @@
+{% extends 'base_layout.html' %}
+{% block slide %}
+
+<section class="section">
+<div class="container-slide mb-6 mt-6">
+   <div id="carousel-demo" class="carousel">
+       {% for slide in slides %}
+           <div class="item-1">
+               <img class="slider-img" src="{{ slide.image.url }}" alt="">
+           </div>
+       {% endfor %}
+   </div>
+</div>
+</section>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="box has-background-black">
+        <h1 class="title has-text-centered is-1 has-text-white">
+      Добро пожаловать в мир кросовок
+    </h1>
+    </div>
+
+<style>
+
+
+    .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 400px;
+    }
+
+    .card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-description {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .card-details {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 10px;
+    }
+
+    .card-price {
+        font-size: 22px;
+        color: #f39c12;
+    }
+</style>
+<div class="columns  is-centered is-multiline">
+    {% for i in cloth %}
+    <a class="column  mt-6  is-3 m-4 " style="border-radius: 30px" href="{% url 'shop:cloth_detail' i.pk %}">
+        <div class="card b1">
+            <img src="{{ i.image.url }}" alt="Машина">
+            <div class="card-content">
+                <div class="card-title"> {{ i.title }}</div>
+
+                <div class="card-details">
+                    <p>Дата :{{ i.date }}</p>
+                    <p>Размер :{{i.size}}</p>
+
+                    <p>Категория : {{ i.category }}</p>
+
+                    <p>Бренд:{{ i.brand }}</p>
+                </div>
+                <div class="card-price">Цена: {{ i.price }} сум</div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
